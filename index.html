@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MUI-Wechat-Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="mui/css/mui.css">
+    <link rel="stylesheet" href="libs/css/mui.picker.css">
+    <link rel="stylesheet" href="libs/css/mui.poppicker.css">
+
+    <style>
+        html,
+        body {
+            background-color: #efeff4;
+        }
+        .mui-views,
+        .mui-view,
+        .mui-pages,
+        .mui-page,
+        .mui-page-content {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #efeff4;
+        }
+        .mui-pages {
+            top: 46px;
+            height: auto;
+        }
+        .mui-scroll-wrapper,
+        .mui-scroll {
+            background-color: #efeff4;
+        }
+        #offCanvasSide .mui-scroll-wrapper,
+        #offCanvasSide .mui-scroll{background: #333;}
+        .mui-page.mui-transitioning,
+        .mui-off-canvas-wrap .mui-inner-wrap.mui-transitioning{
+            -webkit-transition: -webkit-transform 300ms ease;
+            transition: transform 300ms ease;
+        }
+        .mui-page-left {
+            -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+        }
+        /*.mui-ios .mui-page-left {*/
+            /*-webkit-transform: translate3d(-100%, 0, 0);*/
+            /*transform: translate3d(-100%, 0, 0);*/
+        /*}*/
+        .mui-off-canvas-wrap .mui-inner-wrap{
+            z-index:0;
+        }
+        .mui-navbar {
+            position: fixed;
+            right: 0;
+            left: 0;
+            z-index: 10;
+            height: 44px;
+            background-color: #f7f7f8;
+        }
+        .mui-navbar .mui-bar {
+            position: absolute;
+            background: transparent;
+            text-align: center;
+        }
+        .mui-android .mui-navbar-inner.mui-navbar-left {
+            opacity: 0;
+        }
+        .mui-ios .mui-navbar-left .mui-left,
+        .mui-ios .mui-navbar-left .mui-center,
+        .mui-ios .mui-navbar-left .mui-right {
+            opacity: 0;
+        }
+        .mui-navbar .mui-btn-nav {
+            -webkit-transition: none;
+            transition: none;
+            -webkit-transition-duration: .0s;
+            transition-duration: .0s;
+        }
+        .mui-navbar .mui-bar .mui-title {
+            display: inline-block;
+            width: auto;
+        }
+        .mui-page-shadow {
+            position: absolute;
+            right: 100%;
+            top: 0;
+            width: 16px;
+            height: 100%;
+            z-index: -1;
+            content: '';
+        }
+        .mui-page-shadow {
+            background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+        }
+        .mui-navbar-inner.mui-transitioning,
+        .mui-navbar-inner .mui-transitioning {
+            -webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
+            transition: opacity 300ms ease, transform 300ms ease;
+        }
+        .mui-page {
+            display: none;
+        }
+        .mui-pages .mui-page {
+            display: block;
+        }
+        .mui-page .mui-table-view:first-child {
+            margin-top: 15px;
+        }
+        .mui-page .mui-table-view:last-child {
+            margin-bottom: 30px;
+        }
+        .mui-table-view {
+            margin-top: 20px;
+        }
+
+        .mui-table-view span.mui-pull-right {
+            color: #999;
+        }
+        .mui-table-view-divider {
+            background-color: #efeff4;
+            font-size: 14px;
+        }
+        .mui-table-view-divider:before,
+        .mui-table-view-divider:after {
+            height: 0;
+        }
+        .head {
+            height: 40px;
+        }
+        #head {
+            line-height: 40px;
+        }
+        .head-img {
+            width: 40px;
+            height: 40px;
+        }
+        #head-img1 {
+            position: absolute;
+            bottom: 10px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+        }
+        .update {
+            font-style: normal;
+            color: #999999;
+            margin-right: -25px;
+            font-size: 15px
+        }
+        .mui-fullscreen {
+            position: fixed;
+            z-index: 20;
+            background-color: #000;
+        }
+        .mui-ios .mui-navbar .mui-bar .mui-title {
+            position: static;
+        }
+        html,
+        body {
+            background-color: #efeff4;
+        }
+        span.mui-icon {
+            font-size: 14px;
+            color: #007aff;
+            margin-left: -15px;
+            padding-right: 10px;
+        }
+        .mui-off-canvas-right {
+            color: #fff;
+        }
+        .title {
+            margin: 35px 15px 10px;
+        }
+        .title+.content {
+            margin: 10px 15px 35px;
+            color: #bbb;
+            text-indent: 1em;
+            font-size: 14px;
+            line-height: 24px;
+        }
+        input {
+            color: #000;
+        }
+        .mui-control-content{
+            height:100%;
+        }
+    </style>
+
+
+</head>
+<body class="mui-fullscreen">
+    <!--页面主结构开始-->
+    <div id="my-expense" class="mui-views">
+        <div class="mui-view mui-off-canvas-wrap" id="my-expense-wrapper">
+            <aside id="offCanvasSide" class="mui-off-canvas-left">
+                <div id="offCanvasSideScroll" class="mui-content mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <div class="title">侧滑导航</div>
+                        <div class="content">
+                            这是可拖动式侧滑菜单示例，你可以在这里放置任何内容；关闭侧滑菜单有多种方式： 1.在手机屏幕任意位置向右拖动(drag)；2.点击本侧滑菜单页之外的任意位置; 3.点击如下红色按钮
+                        </div>
+                        <div class="title" style="margin-bottom: 25px;">侧滑列表示例</div>
+                        <ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+                            <li class="mui-table-view-cell">
+                                <a class="mui-navigate-right">
+                                    Item 1
+                                </a>
+                            </li>
+                            <li class="mui-table-view-cell">
+                                <a class="mui-navigate-right">
+                                    Item 2
+                                </a>
+                            </li>
+                            <li class="mui-table-view-cell">
+                                <a class="mui-navigate-right">
+                                    Item 3
+                                </a>
+                            </li>
+                            <li class="mui-table-view-cell">
+                                <a class="mui-navigate-right">
+                                    Item 4
+                                </a>
+                            </li>
+                            <li class="mui-table-view-cell">
+                                <a class="mui-navigate-right">
+                                    Item 5
+                                </a>
+                            </li>
+                            <li class="mui-table-view-cell">
+                                <a class="mui-navigate-right">
+                                    Item 6
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+            <div class="mui-inner-wrap">
+                <div class="mui-navbar"></div>
+                <div class="mui-pages"></div>
+                <div class="mui-off-canvas-backdrop"></div>
+            </div>
+        </div>
+    </div>
+    <!--页面主结构结束-->
+    <div class="mui-page mui-inner-wrap" id="main-panel">
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <a id="offCanvasBtn" href="#offCanvasSide" class="mui-left mui-icon mui-action-menu mui-icon-bars mui-pull-left mui-btn-nav"></a>
+            <h1 class="mui-center mui-title">我的费用</h1>
+        </div>
+        <!--页面主内容区开始-->
+        <div class="mui-page-content">
+            <div id="segmentedControl" class="mui-segmented-control">
+                <a class="mui-control-item mui-active" href="#item1">待提交</a>
+                <a class="mui-control-item" href="#item2">审批中</a>
+                <a class="mui-control-item" href="#item3">已通过</a>
+                <a class="mui-control-item" href="#item4">确认中</a>
+                <a class="mui-control-item" href="#item5">全部</a>
+            </div>
+            <div id="item1" class="mui-control-content mui-active">
+                <div class="mui-content mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view mui-table-view-chevron">
+                            <li class="mui-table-view-cell mui-media">
+                                <a class="mui-navigate-right" href="#report-detail">
+                                    <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                                    <div class="mui-media-body">
+                                        餐费(已关闭)
+                                        <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                        <p class='mui-ellipsis'>天津开发项目</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="item2" class="mui-control-content">
+                <div class="mui-content mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view mui-table-view-chevron">
+                            <li class="mui-table-view-cell mui-media">
+                                <a class="mui-navigate-right" href="#report-detail">
+                                    <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                                    <div class="mui-media-body">
+                                        住宿费(已关闭)
+                                        <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                        <p class='mui-ellipsis'>地推项目</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="item3" class="mui-control-content">
+                <div class="mui-content mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view mui-table-view-chevron">
+                            <li class="mui-table-view-cell mui-media">
+                                <a class="mui-navigate-right" href="#report-detail">
+                                    <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                                    <div class="mui-media-body">
+                                        打车费
+                                        <p class='mui-ellipsis'>￥221.00-1张票据(发票)</p>
+                                        <p class='mui-ellipsis'>天津开发项目</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="item4" class="mui-control-content">
+                <div class="mui-content mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view mui-table-view-chevron">
+                            <li class="mui-table-view-cell mui-media">
+                                <a class="mui-navigate-right" href="#report-detail">
+                                    <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                                    <div class="mui-media-body">
+                                        招待费
+                                        <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                        <p class='mui-ellipsis'>发项目</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="item5" class="mui-control-content">
+                <div class="mui-content mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view mui-table-view-chevron">
+                            <li class="mui-table-view-cell mui-media">
+                                <a class="mui-navigate-right" href="#report-detail">
+                                    <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                                    <div class="mui-media-body">
+                                        其他支出
+                                        <p class='mui-ellipsis'>￥232321.00-1张票据(非发票)</p>
+                                        <p class='mui-ellipsis'>天津开发项目</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--页面主内容区结束-->
+    </div>
+
+    <!--单页面start-->
+    <div class="mui-page" id="report-detail">
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <button type="button" class="mui-left mui-action-back mui-btn mui-btn-link mui-btn-nav mui-pull-left">
+                <span class="mui-icon mui-icon-left-nav"></span>我的费用
+            </button>
+            <h1 class="mui-center mui-title">报销单详情</h1>
+        </div>
+        <div class="mui-page-content">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <ul class="mui-table-view mui-table-view-chevron">
+                        <li class="mui-table-view-cell mui-media">
+                            <a class="mui-navigate-right" href="#receipt-detail">
+                                <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                                <div class="mui-media-body">
+                                    餐费1(已关闭)
+                                    <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                    <p class='mui-ellipsis'>天津开发项目1</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="mui-table-view-cell mui-media">
+                            <a class="mui-navigate-right" href="#receipt-detail">
+                                <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                                <div class="mui-media-body">
+                                    餐费2(已关闭)
+                                    <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                    <p class='mui-ellipsis'>天津开发项目2</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="mui-table-view-cell mui-media">
+                            <a class="mui-navigate-right" href="#receipt-detail">
+                                <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                                <div class="mui-media-body">
+                                    餐费3(已关闭)
+                                    <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                    <p class='mui-ellipsis'>天津开发项目3</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mui-page" id="receipt-detail">
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+                <span class="mui-icon mui-icon-left-nav"></span>报销单详情
+            </button>
+            <h1 class="mui-center mui-title">票据详情</h1>
+        </div>
+        <div class="mui-page-content">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <ul class="mui-table-view mui-table-view-chevron">
+                        <li class="mui-table-view-cell mui-media">
+                            <a class="mui-navigate-right" href="#">
+                                <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                                <div class="mui-media-body">
+                                    餐费(已关闭)
+                                    <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                    <p class='mui-ellipsis'>天津开发项目</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="mui/js/mui.js"></script>
+<script src="libs/js/mui.picker.js"></script>
+<script src="libs/js/mui.poppicker.js"></script>
+<script src="libs/js/mui.view.js"></script>
+<script src="libs/js/zepto.min.js"></script>
+
+<script type="text/javascript">
+    (function($, doc, Z) {
+        $.init({
+            gestureConfig:{
+                tap: true, //默认为true
+                doubletap: true, //默认为false
+                longtap: true, //默认为false
+                swipe: true, //默认为true
+                drag: true, //默认为true
+                hold:false,//默认为false，不监听
+                release:false//默认为false，不监听
+            },
+            swipeBack: false,
+        });
+
+        var viewApi = mui('#my-expense').view({
+            defaultPage: '#main-panel'
+        });
+        mui('.mui-scroll-wrapper').scroll();
+//        $.ready(function() {
+//            var body = Z(".mui-content")[0];
+//            body.addEventListener("tap", function (ev){
+//                console.log("skdfjkdsf")
+//            });
+//        });
+        var view = viewApi.view;
+        (function($) {
+            //处理view的后退与webview后退
+            var oldBack = $.back;
+            $.back = function() {
+                if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+                    viewApi.back();
+                } else { //执行webview后退
+                    oldBack();
+                }
+            };
+            //监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+            //第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+            view.addEventListener('pageBeforeShow', function(e) {
+                //				console.log(e.detail.page.id + ' beforeShow');
+            });
+            view.addEventListener('pageShow', function(e) {
+                //				console.log(e.detail.page.id + ' show');
+            });
+            view.addEventListener('pageBeforeBack', function(e) {
+                //				console.log(e.detail.page.id + ' beforeBack');
+            });
+            view.addEventListener('pageBack', function(e) {
+                //				console.log(e.detail.page.id + ' back');
+            });
+        })(mui);
+
+        // 侧滑菜单切换企业
+        //侧滑容器父节点
+        var offCanvasWrapper = mui('#my-expense-wrapper');
+        //主界面容器
+        var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-page-content');
+        //菜单容器
+        var offCanvasSide = document.getElementById("offCanvasSide");
+        //侧滑容器的class列表，增加.mui-slide-in即可实现菜单移动、主界面不动的效果；
+        var classList = offCanvasWrapper[0].classList;
+        //变换侧滑动画移动效果；
+        offCanvasSide.classList.remove('mui-transitioning');
+        offCanvasSide.setAttribute('style', '');
+        classList.remove('mui-slide-in');
+        classList.remove('mui-scalable');
+        classList.add('mui-slide-in');
+        mui('#offCanvasSideScroll').scroll();
+
+
+
+    })(mui, document, Zepto);
+
+</script>
+</html>
