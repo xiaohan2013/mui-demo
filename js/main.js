@@ -69,8 +69,60 @@ window.common = {
                 release:false//默认为false，不监听
             },
             swipeBack: false,
+            pullRefresh: {
+                container: '#wait-wrapper',
+                down: {
+                        callback: pulldownRefresh
+                },
+                up: {
+                    callback: pullupRefresh,
+                }
+            }
         });
-        M('.mui-scroll-wrapper').scroll();
+
+        function pulldownRefresh() {
+            setTimeout(function() {
+                var table = document.body.querySelector('#wait-wrapper .mui-table-view');
+                var cells = document.body.querySelectorAll('#wait-wrapper .mui-table-view-cell');
+                for (var i = cells.length, len = i + 3; i < len; i++) {
+                    var li = document.createElement('li');
+                    li.className = 'mui-table-view-cell mui-media';
+                    li.setAttribute("data-pid","201512-2010123"+i);
+                    li.innerHTML = '<a class="mui-navigate-right mui-forward" href="#report-detail"><img class="mui-media-object mui-pull-left head-img" id="head-img" src=""><div class="mui-media-body">餐费(已关闭)<p class="mui-ellipsis">￥21.00-1张票据(非发票)</p><p class="mui-ellipsis">天津开发项目</p></div></a>';
+                    //下拉刷新，新纪录插到最前面；
+                    table.insertBefore(li, table.firstChild);
+                }
+                mui('#wait-wrapper').pullRefresh().endPulldownToRefresh(); //refresh completed
+            }, 1500);
+        }
+        var count = 2;;
+        function pullupRefresh() {
+            setTimeout(function() {
+                mui('#wait-wrapper').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+                var table = document.body.querySelector('#wait-wrapper .mui-table-view');
+                var cells = document.body.querySelectorAll('#wait-wrapper .mui-table-view-cell');
+                for (var i = cells.length, len = i + 20; i < len; i++) {
+                    var li = document.createElement('li');
+                    li.className = 'mui-table-view-cell mui-media';
+                    li.setAttribute("data-pid","201512-2010123"+i);
+                    li.innerHTML = '<a class="mui-navigate-right mui-forward" href="#report-detail"><img class="mui-media-object mui-pull-left head-img" id="head-img" src=""><div class="mui-media-body">餐费(已关闭)<p class="mui-ellipsis">￥21.00-1张票据(非发票)</p><p class="mui-ellipsis">天津开发项目</p></div></a>';
+                    table.appendChild(li);
+                }
+            }, 1500);
+        }
+
+        if (mui.os.plus) {
+            mui.plusReady(function() {
+                setTimeout(function() {
+                    mui('#wait-wrapper').pullRefresh().pullupLoading();
+                }, 1000);
+
+            });
+        } else {
+            mui.ready(function() {
+                mui('#wait-wrapper').pullRefresh().pullupLoading();
+            });
+        }
 
         // 侧滑菜单切换企业
         //侧滑容器父节点
@@ -103,7 +155,6 @@ window.common = {
                 }
             }
         });
-
 })(mui, document, Zepto);
 
 
@@ -112,6 +163,7 @@ window.common = {
     var viewApi = $('#my-expense').view({
         defaultPage: '#main-panel'
     });
+    // 当前页面的引用
     var view = viewApi.view;
 
     //处理view的后退与webview后退
@@ -125,7 +177,6 @@ window.common = {
     };
     //监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
     //第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
-
     view.addEventListener('pageBeforeShow', function(e) {
         console.log(mui.target)
         //				console.log(e.detail.page.id + ' beforeShow');
@@ -190,20 +241,38 @@ $(".mui-control-item").on("tap", function (ev) {
     common.panelNetworkHandler($activePanalID.substr(1));
 })
 
+
+// 关闭offcanvas面板
+var closeOffCanvas = function () {
+    var offcanvasWrap = mui(mui.classSelector('.off-canvas-wrap'))[0];
+    var offCanvas = offcanvasWrap.querySelector('.' + mui.className('off-canvas-left') + '.' + mui.className('active'));
+
+    offcanvasWrap.classList.remove("mui-active")
+    offCanvas.classList.remove("mui-active")
+    offCanvas.style.webkitTransform = 'translate3d(' + (-290) + 'px,0,0)';
+}
+
 //切换出offCanvas时，请求可选的企业列表
+
+var offcanvas =  mui(mui.classSelector('.off-canvas-wrap')).offCanvas();
 var currCompanyId;
 document.querySelector('#companies-list').addEventListener('selected',function(e){
-    var currSelectId = $(e.detail.el).data("cid");
-    currCompanyId = currSelectId;
+        var currSelectId = $(e.detail.el).data("cid");
+        currCompanyId = currSelectId;
 
-    //mui.ajax({
-    //    url:"list?cid="+currCompanyId,
-    //    type:"GET",
-    //    dataType:"json",
-    //    success: function (result) {
-    //
-    //    }
-    //})
-    console.log(mui("").offCanvas());
+        //mui.ajax({
+        //    url:"list?cid="+currCompanyId,
+        //    type:"GET",
+        //    dataType:"json",
+        //    success: function (result) {
+        //
+        //    }
+        //})
+        //closeOffCanvas();
+        offcanvas.close();
 });
+
+
+
+
 
