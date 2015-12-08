@@ -58,156 +58,156 @@ window.common = {
     }
 };
 (function(M, doc, Z) {
-        M.init({
-            gestureConfig:{
-                tap: true, //Ä¬ÈÏÎªtrue
-                doubletap: true, //Ä¬ÈÏÎªfalse
-                longtap: true, //Ä¬ÈÏÎªfalse
-                swipe: true, //Ä¬ÈÏÎªtrue
-                drag: true, //Ä¬ÈÏÎªtrue
-                hold:false,//Ä¬ÈÏÎªfalse£¬²»¼àÌı
-                release:false//Ä¬ÈÏÎªfalse£¬²»¼àÌı
+    M.init({
+        gestureConfig:{
+            tap: true, //é»˜è®¤ä¸ºtrue
+            doubletap: true, //é»˜è®¤ä¸ºfalse
+            longtap: true, //é»˜è®¤ä¸ºfalse
+            swipe: true, //é»˜è®¤ä¸ºtrue
+            drag: true, //é»˜è®¤ä¸ºtrue
+            hold:false,//é»˜è®¤ä¸ºfalseï¼Œä¸ç›‘å¬
+            release:false//é»˜è®¤ä¸ºfalseï¼Œä¸ç›‘å¬
+        },
+        swipeBack: false,
+        pullRefresh: {
+            container: '#wait-wrapper',
+            down: {
+                callback: pulldownRefresh
             },
-            swipeBack: false,
-            pullRefresh: {
-                container: '#wait-wrapper',
-                down: {
-                        callback: pulldownRefresh
-                },
-                up: {
-                    callback: pullupRefresh,
-                }
+            up: {
+                callback: pullupRefresh,
             }
-        });
-
-        function pulldownRefresh() {
-            setTimeout(function() {
-                var table = document.body.querySelector('#wait-wrapper .mui-table-view');
-                var cells = document.body.querySelectorAll('#wait-wrapper .mui-table-view-cell');
-                for (var i = cells.length, len = i + 3; i < len; i++) {
-                    var li = document.createElement('li');
-                    li.className = 'mui-table-view-cell mui-media';
-                    li.setAttribute("data-pid","201512-2010123"+i);
-                    li.innerHTML = '<a class="mui-navigate-right mui-forward" href="#report-detail"><img class="mui-media-object mui-pull-left head-img" id="head-img" src=""><div class="mui-media-body">²Í·Ñ(ÒÑ¹Ø±Õ)<p class="mui-ellipsis">£¤21.00-1ÕÅÆ±¾İ(·Ç·¢Æ±)</p><p class="mui-ellipsis">Ìì½ò¿ª·¢ÏîÄ¿</p></div></a>';
-                    //ÏÂÀ­Ë¢ĞÂ£¬ĞÂ¼ÍÂ¼²åµ½×îÇ°Ãæ£»
-                    table.insertBefore(li, table.firstChild);
-                }
-                mui('#wait-wrapper').pullRefresh().endPulldownToRefresh(); //refresh completed
-            }, 1500);
         }
-        var count = 2;;
-        function pullupRefresh() {
+    });
+
+    function pulldownRefresh() {
+        setTimeout(function() {
+            var table = document.body.querySelector('#wait-wrapper .mui-table-view');
+            var cells = document.body.querySelectorAll('#wait-wrapper .mui-table-view-cell');
+            for (var i = cells.length, len = i + 3; i < len; i++) {
+                var li = document.createElement('li');
+                li.className = 'mui-table-view-cell mui-media';
+                li.setAttribute("data-pid","201512-2010123"+i);
+                li.innerHTML = '<a class="mui-navigate-right mui-forward" href="#report-detail"><img class="mui-media-object mui-pull-left head-img" id="head-img" src=""><div class="mui-media-body">é¤è´¹(å·²å…³é—­)<p class="mui-ellipsis">ï¿¥21.00-1å¼ ç¥¨æ®(éå‘ç¥¨)</p><p class="mui-ellipsis">å¤©æ´¥å¼€å‘é¡¹ç›®</p></div></a>';
+                //ä¸‹æ‹‰åˆ·æ–°ï¼Œæ–°çºªå½•æ’åˆ°æœ€å‰é¢ï¼›
+                table.insertBefore(li, table.firstChild);
+            }
+            mui('#wait-wrapper').pullRefresh().endPulldownToRefresh(); //refresh completed
+        }, 1500);
+    }
+    var count = 2;;
+    function pullupRefresh() {
+        setTimeout(function() {
+            mui('#wait-wrapper').pullRefresh().endPullupToRefresh((++count > 2)); //å‚æ•°ä¸ºtrueä»£è¡¨æ²¡æœ‰æ›´å¤šæ•°æ®äº†ã€‚
+            var table = document.body.querySelector('#wait-wrapper .mui-table-view');
+            var cells = document.body.querySelectorAll('#wait-wrapper .mui-table-view-cell');
+            for (var i = cells.length, len = i + 20; i < len; i++) {
+                var li = document.createElement('li');
+                li.className = 'mui-table-view-cell mui-media';
+                li.setAttribute("data-pid","201512-2010123"+i);
+                li.innerHTML = '<a class="mui-navigate-right mui-forward" href="#report-detail"><img class="mui-media-object mui-pull-left head-img" id="head-img" src=""><div class="mui-media-body">é¤è´¹(å·²å…³é—­)<p class="mui-ellipsis">ï¿¥21.00-1å¼ ç¥¨æ®(éå‘ç¥¨)</p><p class="mui-ellipsis">å¤©æ´¥å¼€å‘é¡¹ç›®</p></div></a>';
+                table.appendChild(li);
+            }
+        }, 1500);
+    }
+
+    if (mui.os.plus) {
+        mui.plusReady(function() {
             setTimeout(function() {
-                mui('#wait-wrapper').pullRefresh().endPullupToRefresh((++count > 2)); //²ÎÊıÎªtrue´ú±íÃ»ÓĞ¸ü¶àÊı¾İÁË¡£
-                var table = document.body.querySelector('#wait-wrapper .mui-table-view');
-                var cells = document.body.querySelectorAll('#wait-wrapper .mui-table-view-cell');
-                for (var i = cells.length, len = i + 20; i < len; i++) {
-                    var li = document.createElement('li');
-                    li.className = 'mui-table-view-cell mui-media';
-                    li.setAttribute("data-pid","201512-2010123"+i);
-                    li.innerHTML = '<a class="mui-navigate-right mui-forward" href="#report-detail"><img class="mui-media-object mui-pull-left head-img" id="head-img" src=""><div class="mui-media-body">²Í·Ñ(ÒÑ¹Ø±Õ)<p class="mui-ellipsis">£¤21.00-1ÕÅÆ±¾İ(·Ç·¢Æ±)</p><p class="mui-ellipsis">Ìì½ò¿ª·¢ÏîÄ¿</p></div></a>';
-                    table.appendChild(li);
-                }
-            }, 1500);
-        }
-
-        if (mui.os.plus) {
-            mui.plusReady(function() {
-                setTimeout(function() {
-                    mui('#wait-wrapper').pullRefresh().pullupLoading();
-                }, 1000);
-
-            });
-        } else {
-            mui.ready(function() {
                 mui('#wait-wrapper').pullRefresh().pullupLoading();
-            });
-        }
+            }, 1000);
 
-        // ²à»¬²Ëµ¥ÇĞ»»ÆóÒµ
-        //²à»¬ÈİÆ÷¸¸½Úµã
-        var offCanvasWrapper = mui('#my-expense-wrapper');
-        //Ö÷½çÃæÈİÆ÷
-        var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-page-content');
-        //²Ëµ¥ÈİÆ÷
-        var offCanvasSide = document.getElementById("offCanvasSide");
-        //²à»¬ÈİÆ÷µÄclassÁĞ±í£¬Ôö¼Ó.mui-slide-in¼´¿ÉÊµÏÖ²Ëµ¥ÒÆ¶¯¡¢Ö÷½çÃæ²»¶¯µÄĞ§¹û£»
-        var classList = offCanvasWrapper[0].classList;
-        //±ä»»²à»¬¶¯»­ÒÆ¶¯Ğ§¹û£»
-        offCanvasSide.classList.remove('mui-transitioning');
-        offCanvasSide.setAttribute('style', '');
-        classList.remove('mui-slide-in');
-        classList.remove('mui-scalable');
-        classList.add('mui-slide-in');
-        M('#offCanvasSideScroll').scroll();
-
-        //³õÊ¼»¯¼ÓÔØÊı¾İ
-        common.panelNetworkHandler();
-
-        M.ajax({
-            type:"GET",
-            url:'data/company.json',
-            dataType:"json",
-            success: function (result) {
-                if(result.code == 0){
-                    var companyList = template("Tpl_companyItem",{data:result.data});
-                    Z("#companies-list").html(companyList);
-                }
-            }
         });
+    } else {
+        mui.ready(function() {
+            mui('#wait-wrapper').pullRefresh().pullupLoading();
+        });
+    }
+
+    // ä¾§æ»‘èœå•åˆ‡æ¢ä¼ä¸š
+    //ä¾§æ»‘å®¹å™¨çˆ¶èŠ‚ç‚¹
+    var offCanvasWrapper = mui('#my-expense-wrapper');
+    //ä¸»ç•Œé¢å®¹å™¨
+    var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-page-content');
+    //èœå•å®¹å™¨
+    var offCanvasSide = document.getElementById("offCanvasSide");
+    //ä¾§æ»‘å®¹å™¨çš„classåˆ—è¡¨ï¼Œå¢åŠ .mui-slide-inå³å¯å®ç°èœå•ç§»åŠ¨ã€ä¸»ç•Œé¢ä¸åŠ¨çš„æ•ˆæœï¼›
+    var classList = offCanvasWrapper[0].classList;
+    //å˜æ¢ä¾§æ»‘åŠ¨ç”»ç§»åŠ¨æ•ˆæœï¼›
+    offCanvasSide.classList.remove('mui-transitioning');
+    offCanvasSide.setAttribute('style', '');
+    classList.remove('mui-slide-in');
+    classList.remove('mui-scalable');
+    classList.add('mui-slide-in');
+    M('#offCanvasSideScroll').scroll();
+
+    //åˆå§‹åŒ–åŠ è½½æ•°æ®
+    common.panelNetworkHandler();
+
+    M.ajax({
+        type:"GET",
+        url:'data/company.json',
+        dataType:"json",
+        success: function (result) {
+            if(result.code == 0){
+                var companyList = template("Tpl_companyItem",{data:result.data});
+                Z("#companies-list").html(companyList);
+            }
+        }
+    });
 })(mui, document, Zepto);
 
 
-// Ò³ÃæÄÚ²¿µÄÇĞ»»
+// é¡µé¢å†…éƒ¨çš„åˆ‡æ¢
 (function($,Z){
     var viewApi = $('#my-expense').view({
         defaultPage: '#main-panel'
     });
-    // µ±Ç°Ò³ÃæµÄÒıÓÃ
+    // å½“å‰é¡µé¢çš„å¼•ç”¨
     var view = viewApi.view;
 
-    //´¦ÀíviewµÄºóÍËÓëwebviewºóÍË
+    //å¤„ç†viewçš„åé€€ä¸webviewåé€€
     var oldBack = $.back;
     $.back = function() {
-        if (viewApi.canBack()) { //Èç¹ûview¿ÉÒÔºóÍË£¬ÔòÖ´ĞĞviewµÄºóÍË
+        if (viewApi.canBack()) { //å¦‚æœviewå¯ä»¥åé€€ï¼Œåˆ™æ‰§è¡Œviewçš„åé€€
             viewApi.back();
-        } else { //Ö´ĞĞwebviewºóÍË
+        } else { //æ‰§è¡Œwebviewåé€€
             oldBack();
         }
     };
-    //¼àÌıÒ³ÃæÇĞ»»ÊÂ¼ş·½°¸1,Í¨¹ıviewÔªËØ¼àÌıËùÓĞÒ³ÃæÇĞ»»ÊÂ¼ş£¬Ä¿Ç°Ìá¹©pageBeforeShow|pageShow|pageBeforeBack|pageBackËÄÖÖÊÂ¼ş(beforeÊÂ¼şÎª¶¯»­¿ªÊ¼Ç°´¥·¢)
-    //µÚÒ»¸ö²ÎÊıÎªÊÂ¼şÃû³Æ£¬µÚ¶ş¸ö²ÎÊıÎªÊÂ¼ş»Øµ÷£¬ÆäÖĞe.detail.pageÎªµ±Ç°Ò³ÃæµÄhtml¶ÔÏó
+    //ç›‘å¬é¡µé¢åˆ‡æ¢äº‹ä»¶æ–¹æ¡ˆ1,é€šè¿‡viewå…ƒç´ ç›‘å¬æ‰€æœ‰é¡µé¢åˆ‡æ¢äº‹ä»¶ï¼Œç›®å‰æä¾›pageBeforeShow|pageShow|pageBeforeBack|pageBackå››ç§äº‹ä»¶(beforeäº‹ä»¶ä¸ºåŠ¨ç”»å¼€å§‹å‰è§¦å‘)
+    //ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºäº‹ä»¶åç§°ï¼Œç¬¬äºŒä¸ªå‚æ•°ä¸ºäº‹ä»¶å›è°ƒï¼Œå…¶ä¸­e.detail.pageä¸ºå½“å‰é¡µé¢çš„htmlå¯¹è±¡
     view.addEventListener('pageBeforeShow', function(e) {
         console.log(mui.target)
         //				console.log(e.detail.page.id + ' beforeShow');
         console.log(e.detail.page)
         var currPage = e.detail.page;
-        if(currPage.id == "receipt-detail"){
-            var ReceiptDetailPage = Z(currPage).find("#receipt-container")
-            //console.log(template(Tpl_listItem,[]))
-            Z(ReceiptDetailPage).html( template("Tpl_listItem",{data:[{
-                pid:"201511-210",
-                pname:"²Í·Ñ£¨ÒÑ¹Ø±Õ£©",
-                amount:300,
-                invoice:"·¢Æ±",
-                count:"12",
-                project:"ÖĞ¹ú¼èÉ¬"
-            },{
-                pid:"201512-2310",
-                pname:"½¨Öş·Ñ",
-                amount:100,
-                invoice:"·Ç·¢Æ±",
-                count:"12",
-                project:"±±¾©µØÌú"
-            },{
-                pid:"201511-210",
-                pname:"·şÎñ·Ñ£¨ÒÑ¹Ø±Õ£©",
-                amount:12300,
-                invoice:"·¢Æ±",
-                count:"2",
-                project:"ÀúÊ·Æğµã"
-            }]}));
-        }
+        //if(currPage.id == "receipt-detail"){
+        //    var ReceiptDetailPage = Z(currPage).find("#receipt-container")
+        //    //console.log(template(Tpl_listItem,[]))
+        //    Z(ReceiptDetailPage).html( template("Tpl_listItem",{data:[{
+        //        pid:"201511-210",
+        //        pname:"é¤è´¹ï¼ˆå·²å…³é—­ï¼‰",
+        //        amount:300,
+        //        invoice:"å‘ç¥¨",
+        //        count:"12",
+        //        project:"ä¸­å›½è‰°æ¶©"
+        //    },{
+        //        pid:"201512-2310",
+        //        pname:"å»ºç­‘è´¹",
+        //        amount:100,
+        //        invoice:"éå‘ç¥¨",
+        //        count:"12",
+        //        project:"åŒ—äº¬åœ°é“"
+        //    },{
+        //        pid:"201511-210",
+        //        pname:"æœåŠ¡è´¹ï¼ˆå·²å…³é—­ï¼‰",
+        //        amount:12300,
+        //        invoice:"å‘ç¥¨",
+        //        count:"2",
+        //        project:"å†å²èµ·ç‚¹"
+        //    }]}));
+        //}
     });
     view.addEventListener('pageShow', function(e) {
         Z('#loadingToast').hide();
@@ -224,7 +224,7 @@ window.common = {
     });
 })(mui,Zepto);
 
-// µã»÷Ò»ÌõÊı¾İ£¬½øĞĞ´¦Àí
+// ç‚¹å‡»ä¸€æ¡æ•°æ®ï¼Œè¿›è¡Œå¤„ç†
 $(".mui-table-view-cell").on("tap", function (ev) {
     ev.preventDefault();
     var currTarget = $(this);
@@ -232,7 +232,7 @@ $(".mui-table-view-cell").on("tap", function (ev) {
     $('#loadingToast').show();
 });
 
-//ÇĞ»»TabÈ¥ÇëÇóÏàÓ¦µÄÊı¾İ
+//åˆ‡æ¢Tabå»è¯·æ±‚ç›¸åº”çš„æ•°æ®
 $(".mui-control-item").on("tap", function (ev) {
     var currPanel = ev.detail;
     var $activePanalID = $(this).attr("href");
@@ -242,7 +242,7 @@ $(".mui-control-item").on("tap", function (ev) {
 })
 
 
-// ¹Ø±ÕoffcanvasÃæ°å
+// å…³é—­offcanvasé¢æ¿
 var closeOffCanvas = function () {
     var offcanvasWrap = mui(mui.classSelector('.off-canvas-wrap'))[0];
     var offCanvas = offcanvasWrap.querySelector('.' + mui.className('off-canvas-left') + '.' + mui.className('active'));
@@ -252,25 +252,41 @@ var closeOffCanvas = function () {
     offCanvas.style.webkitTransform = 'translate3d(' + (-290) + 'px,0,0)';
 }
 
-//ÇĞ»»³öoffCanvasÊ±£¬ÇëÇó¿ÉÑ¡µÄÆóÒµÁĞ±í
+//åˆ‡æ¢å‡ºoffCanvasæ—¶ï¼Œè¯·æ±‚å¯é€‰çš„ä¼ä¸šåˆ—è¡¨
 
 var offcanvas =  mui(mui.classSelector('.off-canvas-wrap')).offCanvas();
 var currCompanyId;
 document.querySelector('#companies-list').addEventListener('selected',function(e){
-        var currSelectId = $(e.detail.el).data("cid");
-        currCompanyId = currSelectId;
+    var currSelectId = $(e.detail.el).data("cid");
+    currCompanyId = currSelectId;
 
-        //mui.ajax({
-        //    url:"list?cid="+currCompanyId,
-        //    type:"GET",
-        //    dataType:"json",
-        //    success: function (result) {
-        //
-        //    }
-        //})
-        //closeOffCanvas();
-        offcanvas.close();
+    //mui.ajax({
+    //    url:"list?cid="+currCompanyId,
+    //    type:"GET",
+    //    dataType:"json",
+    //    success: function (result) {
+    //
+    //    }
+    //})
+    //closeOffCanvas();
+    offcanvas.close();
 });
+
+
+var previewImageApi = mui.previewImage();
+console.log(previewImageApi.addImages)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
