@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="GBK">
-    <title>MUI-Wechat-Demo</title>
+    <meta charset="UTF-8">
+    <title>我的费用</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -198,13 +198,13 @@
 
 </head>
 <body class="mui-fullscreen">
-    <!--ҳ�����ṹ��ʼ-->
+    <!--页面主结构开始-->
     <div id="my-expense" class="mui-views">
         <div class="mui-view mui-off-canvas-wrap" id="my-expense-wrapper">
             <aside id="offCanvasSide" class="mui-off-canvas-left">
                 <div id="offCanvasSideScroll" class="mui-content mui-scroll-wrapper">
                     <div class="mui-scroll">
-                        <div class="title">��ҵ�б�</div>
+                        <div class="title">企业列表</div>
                         <ul class="mui-table-view mui-table-view-chevron mui-table-view-radio" id="companies-list"></ul>
                     </div>
                 </div>
@@ -216,20 +216,20 @@
             </div>
         </div>
     </div>
-    <!--ҳ�����ṹ����-->
+    <!--页面主结构结束-->
     <div class="mui-page mui-inner-wrap" id="main-panel">
         <div class="mui-navbar-inner mui-bar mui-bar-nav">
             <a id="offCanvasBtn" href="#offCanvasSide" class="mui-left mui-icon mui-action-menu mui-icon-bars mui-pull-left mui-btn-nav"></a>
-            <h1 class="mui-center mui-title">�ҵķ���</h1>
+            <h1 class="mui-center mui-title">我的费用</h1>
         </div>
-        <!--ҳ������������ʼ-->
+        <!--页面主内容区开始-->
         <div class="mui-page-content">
             <div id="segmentedControl" class="mui-segmented-control">
-                <a class="mui-control-item mui-active" href="#wait-commit">���ύ</a>
-                <a class="mui-control-item" href="#in-approval">������</a>
-                <a class="mui-control-item" href="#in-pass">��ͨ��</a>
-                <a class="mui-control-item" href="#in-confirm">ȷ����</a>
-                <a class="mui-control-item" href="#all">ȫ��</a>
+                <a class="mui-control-item mui-active" href="#wait-commit">待提交</a>
+                <a class="mui-control-item" href="#in-approval">审批中</a>
+                <a class="mui-control-item" href="#in-pass">已通过</a>
+                <a class="mui-control-item" href="#in-confirm">确认中</a>
+                <a class="mui-control-item" href="#all">全部</a>
             </div>
             <div id="wait-commit" class="mui-control-content mui-active">
                 <div class="mui-content mui-scroll-wrapper" id="wait-wrapper">
@@ -239,9 +239,9 @@
                                 <!--<a class="mui-navigate-right mui-forward" href="#report-detail">-->
                                     <!--<img class="mui-media-object mui-pull-left head-img" id="head-img" src="">-->
                                     <!--<div class="mui-media-body">-->
-                                        <!--�ͷ�(�ѹر�)-->
-                                        <!--<p class='mui-ellipsis'>��21.00-1��Ʊ��(�Ƿ�Ʊ)</p>-->
-                                        <!--<p class='mui-ellipsis'>��򿪷���Ŀ</p>-->
+                                        <!--餐费(已关闭)-->
+                                        <!--<p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>-->
+                                        <!--<p class='mui-ellipsis'>天津开发项目</p>-->
                                     <!--</div>-->
                                 <!--</a>-->
                             <!--</li>-->
@@ -257,9 +257,9 @@
                                 <a class="mui-navigate-right" href="#report-detail">
                                     <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                                     <div class="mui-media-body">
-                                        ס�޷�(�ѹر�)
-                                        <p class='mui-ellipsis'>��21.00-1��Ʊ��(�Ƿ�Ʊ)</p>
-                                        <p class='mui-ellipsis'>������Ŀ</p>
+                                        住宿费(已关闭)
+                                        <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                        <p class='mui-ellipsis'>地推项目</p>
                                     </div>
                                 </a>
                             </li>
@@ -275,9 +275,9 @@
                                 <a class="mui-navigate-right" href="#report-detail">
                                     <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                                     <div class="mui-media-body">
-                                        �򳵷�
-                                        <p class='mui-ellipsis'>��221.00-1��Ʊ��(��Ʊ)</p>
-                                        <p class='mui-ellipsis'>��򿪷���Ŀ</p>
+                                        打车费
+                                        <p class='mui-ellipsis'>￥221.00-1张票据(发票)</p>
+                                        <p class='mui-ellipsis'>天津开发项目</p>
                                     </div>
                                 </a>
                             </li>
@@ -293,9 +293,9 @@
                                 <a class="mui-navigate-right" href="#report-detail">
                                     <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                                     <div class="mui-media-body">
-                                        �д���
-                                        <p class='mui-ellipsis'>��21.00-1��Ʊ��(�Ƿ�Ʊ)</p>
-                                        <p class='mui-ellipsis'>����Ŀ</p>
+                                        招待费
+                                        <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                        <p class='mui-ellipsis'>发项目</p>
                                     </div>
                                 </a>
                             </li>
@@ -311,9 +311,9 @@
                                 <a class="mui-navigate-right" href="#report-detail">
                                     <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                                     <div class="mui-media-body">
-                                        ����֧��
-                                        <p class='mui-ellipsis'>��232321.00-1��Ʊ��(�Ƿ�Ʊ)</p>
-                                        <p class='mui-ellipsis'>��򿪷���Ŀ</p>
+                                        其他支出
+                                        <p class='mui-ellipsis'>￥232321.00-1张票据(非发票)</p>
+                                        <p class='mui-ellipsis'>天津开发项目</p>
                                     </div>
                                 </a>
                             </li>
@@ -322,16 +322,16 @@
                 </div>
             </div>
         </div>
-        <!--ҳ��������������-->
+        <!--页面主内容区结束-->
     </div>
 
-    <!--��ҳ��start-->
+    <!--单页面start-->
     <div class="mui-page" id="report-detail">
         <div class="mui-navbar-inner mui-bar mui-bar-nav">
             <button type="button" class="mui-left mui-action-back mui-btn mui-btn-link mui-btn-nav mui-pull-left">
-                <span class="mui-icon mui-icon-left-nav"></span>�ҵķ���
+                <span class="mui-icon mui-icon-left-nav"></span>我的费用
             </button>
-            <h1 class="mui-center mui-title">����������</h1>
+            <h1 class="mui-center mui-title">报销单详情</h1>
         </div>
         <div class="mui-page-content">
             <div class="mui-scroll-wrapper">
@@ -341,9 +341,9 @@
                             <a class="mui-navigate-right" href="#receipt-detail">
                                 <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                                 <div class="mui-media-body">
-                                    �ͷ�1(�ѹر�)
-                                    <p class='mui-ellipsis'>��21.00-1��Ʊ��(�Ƿ�Ʊ)</p>
-                                    <p class='mui-ellipsis'>��򿪷���Ŀ1</p>
+                                    餐费1(已关闭)
+                                    <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                    <p class='mui-ellipsis'>天津开发项目1</p>
                                 </div>
                             </a>
                         </li>
@@ -351,9 +351,9 @@
                             <a class="mui-navigate-right" href="#receipt-detail">
                                 <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                                 <div class="mui-media-body">
-                                    �ͷ�2(�ѹر�)
-                                    <p class='mui-ellipsis'>��21.00-1��Ʊ��(�Ƿ�Ʊ)</p>
-                                    <p class='mui-ellipsis'>��򿪷���Ŀ2</p>
+                                    餐费2(已关闭)
+                                    <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                    <p class='mui-ellipsis'>天津开发项目2</p>
                                 </div>
                             </a>
                         </li>
@@ -361,9 +361,9 @@
                             <a class="mui-navigate-right" href="#receipt-detail">
                                 <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                                 <div class="mui-media-body">
-                                    �ͷ�3(�ѹر�)
-                                    <p class='mui-ellipsis'>��21.00-1��Ʊ��(�Ƿ�Ʊ)</p>
-                                    <p class='mui-ellipsis'>��򿪷���Ŀ3</p>
+                                    餐费3(已关闭)
+                                    <p class='mui-ellipsis'>￥21.00-1张票据(非发票)</p>
+                                    <p class='mui-ellipsis'>天津开发项目3</p>
                                 </div>
                             </a>
                         </li>
@@ -375,9 +375,9 @@
     <div class="mui-page" id="receipt-detail">
         <div class="mui-navbar-inner mui-bar mui-bar-nav">
             <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-                <span class="mui-icon mui-icon-left-nav"></span>����������
+                <span class="mui-icon mui-icon-left-nav"></span>报销单详情
             </button>
-            <h1 class="mui-center mui-title">Ʊ������</h1>
+            <h1 class="mui-center mui-title">票据详情</h1>
         </div>
         <div class="mui-page-content">
             <div class="mui-scroll-wrapper">
@@ -404,11 +404,11 @@
                 <div class="weui_loading_leaf weui_loading_leaf_10"></div>
                 <div class="weui_loading_leaf weui_loading_leaf_11"></div>
             </div>
-            <p class="weui_toast_content">���ݼ�����</p>
+            <p class="weui_toast_content">数据加载中</p>
         </div>
     </div>
 
-    <!--ģ��-->
+    <!--模板-->
     <script id="Tpl_listItem" type="text/html">
         <ul class="mui-table-view mui-table-view-chevron">
             <%for (var i=0;i<data.length;i++){%>
@@ -417,7 +417,7 @@
                     <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                     <div class="mui-media-body">
                         <%=data[i].pname%>
-                        <p class='mui-ellipsis'>��<%=data[i].amount%>-<%=data[i].count%>��Ʊ��(<%=data[i].invoice%>)</p>
+                        <p class='mui-ellipsis'>￥<%=data[i].amount%>-<%=data[i].count%>张票据(<%=data[i].invoice%>)</p>
                         <p class='mui-ellipsis'><%=data[i].project%></p>
                     </div>
                 </a>
@@ -427,7 +427,7 @@
     </script>
     <script id="Tpl_dataEmpty" type="text/html">
         <div style="text-align:center;padding-top:30%;">
-            <p>û����ѽ������</p>
+            <p>没数据呀。。。</p>
         </div>
     </script>
     <script id="Tpl_companyItem" type="text/html">
