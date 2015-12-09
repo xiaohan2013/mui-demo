@@ -539,7 +539,8 @@
             <div class="mui-scroll-wrapper">
                 <div class="mui-scroll" id="receipt-container">
                     <div class="mui-content-padded">
-                        <p><img src="images/yuantiao.jpg" data-preview-src="" data-preview-group="1" /></p>
+                        <p><img src="images/yuantiao.jpg" data-preview-src="" data-preview-group="0" /></p>
+                        <p style="display:none;"><img src="images/shuijiao.jpg" data-preview-src="" data-preview-group="0" /></p>
                     </div>
                 </div>
             </div>
@@ -581,6 +582,7 @@
                         <p class='mui-ellipsis'><%=data[i].project%></p>
                     </div>
                 </a>
+                <button type="button" class="mui-btn">提交</button>
             </li>
             <%}%>
         </ul>
@@ -610,3 +612,5 @@
 <script src="libs/js/mui.previewimage.js"></script>
 <script src="js/main.js"></script>
 </html>
+
+
